@@ -1,0 +1,99 @@
+<!--
+reports.ejs
+
+报告历史主界面，展示报告列表，支持筛选，含操作按钮（预览、下载、详情）。
+增强功能：支持按群聊分别显示报告
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>报告历史 - 微信群聊智能分析平台</title>
+    <link rel="stylesheet" href="/css/style.css?v=5.5">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>微信群聊智能分析平台</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/tasks" class="nav-link">任务管理</a></li>
+                <li><a href="/reports" class="nav-link active">报告中心</a></li>
+                <li><a href="/prompt-templates" class="nav-link">提示词管理</a></li>
+                <li><a href="/settings" class="nav-link">系统设置</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="切换主题">🌙</button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-container">
+        
+        <div class="page-content">
+
+        
+            <div class="filter-bar">
+                <div class="filter-row-compact">
+                    <input type="text" id="filter-task" placeholder="🔍 按任务名筛选" class="filter-input-compact">
+                    <input type="text" id="filter-chatroom" placeholder="👥 按群聊名筛选" class="filter-input-compact">
+                    <select id="filter-status" class="filter-select-compact">
+                        <option value="">全部状态</option>
+                        <option value="success">🟢 成功</option>
+                        <option value="processing">🟡 处理中</option>
+                        <option value="failed">🔴 失败</option>
+                    </select>
+                    <div class="date-range-compact">
+                        <input type="date" id="filter-start" class="filter-date-compact" title="开始日期">
+                        <span class="date-separator">-</span>
+                        <input type="date" id="filter-end" class="filter-date-compact" title="结束日期">
+                    </div>
+                    <div class="filter-actions-compact">
+                        <button id="btn-filter" class="btn-filter-compact">筛选</button>
+                        <button id="btn-clear-filter" class="btn-clear-compact">重置</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-main">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>任务名称</th>
+                                <th>群聊名称</th>
+                                <th>消息数</th>
+                                <th>执行时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-tbody">
+                            <!-- 动态插入报告数据 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <div class="empty-icon">📄</div>
+                    <h3>暂无报告</h3>
+                    <p>还没有生成任何分析报告，请先创建并执行分析任务。</p>
+                    <a href="/tasks" class="btn btn-primary">创建任务</a>
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- 分页控件 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/theme.js"></script>
+    <script src="/js/scroll-to-top.js"></script>
+    <script src="/js/ui-manager.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/reports.js"></script>
+</body>
+</html> 

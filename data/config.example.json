@@ -1,0 +1,12 @@
+{
+  "isFirstRun": true,
+  "chatlogUrl": "http://127.0.0.1:5030",
+  "llmApiKeys": {
+    "deepseek": "your-deepseek-api-key-here",
+    "gemini": "your-gemini-api-key-here", 
+    "kimi": "your-kimi-api-key-here"
+  },
+  "nextTaskId": 1,
+  "nextReportId": 1,
+  "nextTemplateId": 7
+}

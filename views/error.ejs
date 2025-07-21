@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误 - 微信群聊智能分析平台</title>
+    <link rel="stylesheet" href="/css/style.css?v=5.5">
+    <style>
+        .error-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-icon {
+            font-size: 80px;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+        
+        .error-title {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .error-message {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .error-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            text-align: left;
+            font-family: monospace;
+            font-size: 14px;
+            color: #666;
+            overflow-x: auto;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+        
+        .suggestions {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .suggestions h4 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+        
+        .suggestions ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .suggestions li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-icon">
+            <% if (error.status === 404) { %>
+                🔍
+            <% } else if (error.status === 500) { %>
+                ⚠️
+            <% } else { %>
+                ❌
+            <% } %>
+        </div>
+        
+        <h1 class="error-title">
+            <% if (error.status === 404) { %>
+                页面未找到
+            <% } else if (error.status === 500) { %>
+                服务器内部错误
+            <% } else { %>
+                出现了一些问题
+            <% } %>
+        </h1>
+        
+        <p class="error-message">
+            <%= message || '抱歉，我们遇到了一个意外的错误。请稍后重试。' %>
+        </p>
+        
+        <% if (error.status === 404) { %>
+            <div class="suggestions">
+                <h4>可能的原因：</h4>
+                <ul>
+                    <li>您访问的页面不存在或已被移除</li>
+                    <li>URL地址输入错误</li>
+                    <li>链接已过期或失效</li>
+                </ul>
+            </div>
+        <% } else if (error.status === 500) { %>
+            <div class="suggestions">
+                <h4>可能的解决方案：</h4>
+                <ul>
+                    <li>刷新页面重试</li>
+                    <li>检查网络连接</li>
+                    <li>稍后再试</li>
+                    <li>如果问题持续，请检查系统日志</li>
+                </ul>
+            </div>
+        <% } %>
+        
+        <% if (error.stack && process.env.NODE_ENV === 'development') { %>
+            <div class="error-details">
+                <strong>错误详情（开发模式）：</strong><br>
+                <%= error.stack %>
+            </div>
+        <% } %>
+        
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">返回首页</a>
+            <a href="javascript:history.back()" class="btn btn-secondary">返回上页</a>
+            <a href="javascript:location.reload()" class="btn btn-success">刷新页面</a>
+        </div>
+        
+        <div class="suggestions">
+            <h4>需要帮助？</h4>
+            <ul>
+                <li>检查<a href="/settings">系统设置</a>确认配置正确</li>
+                <li>查看系统日志文件获取详细信息</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/js/common.js"></script>
+    <script>
+        // 记录错误信息到控制台
+        console.error('页面错误:', {
+            status: '<%= error.status || 0 %>',
+            message: '<%= message || "" %>',
+            url: window.location.href,
+            timestamp: new Date().toISOString()
+        });
+        
+        // 如果是首次运行配置错误，提供快速设置按钮
+        if (window.location.pathname !== '/settings' && '<%= error.status %>' === '500') {
+            const quickSetup = document.createElement('div');
+            quickSetup.style.marginTop = '20px';
+            quickSetup.innerHTML = '<a href="/settings" class="btn btn-primary">快速设置</a>';
+            document.querySelector('.error-actions').appendChild(quickSetup);
+        }
+    </script>
+</body>
+</html> 

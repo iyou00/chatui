@@ -1,0 +1,343 @@
+/* task-list.css
+   任务管理主界面样式，现代简洁风格，适配桌面端
+*/
+
+body {
+    background: #f7f9fb;
+    font-family: var(--font-family-sans);
+    margin: 0;
+    padding: 0;
+}
+
+.task-list-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 32px 36px 28px 36px;
+}
+
+.task-list-container h1 {
+    font-size: 1.5em;
+    margin-bottom: 18px;
+    color: #2d3a4b;
+    text-align: center;
+}
+
+.actions {
+    text-align: right;
+    margin-bottom: 18px;
+}
+
+.btn-create {
+    background: #4f8cff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 22px;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-create:hover {
+    background: #357ae8;
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+
+.task-table th, .task-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e0e6ef;
+    text-align: left;
+    font-size: 1em;
+    vertical-align: middle;
+    height: 78px; /* 统一行高 */
+}
+
+.task-table th {
+    background: #f5f7fa;
+    color: #4f8cff;
+    font-weight: 600;
+    height: 50px; /* 表头高度 */
+}
+
+.task-name .name {
+    font-weight: 500;
+    color: #2d3a4b;
+    margin-bottom: 2px;
+}
+
+.task-name .model {
+    font-size: 0.85em;
+    color: #6c757d;
+}
+
+.chatrooms {
+    max-width: 200px;
+}
+
+.chatroom-tag {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin: 1px 2px;
+    white-space: nowrap;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+    text-align: center;
+    min-width: 50px;
+    height: 32px;
+    line-height: 1;
+}
+
+.status {
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.status-enabled {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-disabled {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-running {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status-completed {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-failed {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-unknown {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.actions {
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    min-height: 78px; /* 与表格行高一致 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 水平居中 */
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.progress {
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.progress .progress-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.btn-action {
+    background: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin: 0 2px;
+    font-family: var(--font-family-sans);
+    font-size: 0.8em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    line-height: 1;
+}
+
+.btn-action:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.btn-toggle {
+    background: #fff3cd;
+    color: #856404;
+    border-color: #ffeaa7;
+}
+
+.btn-toggle:hover {
+    background: #ffeaa7;
+}
+
+.btn-execute {
+    background: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.btn-execute:hover {
+    background: #c3e6cb;
+}
+
+.btn-edit {
+    background: #cce5ff;
+    color: #004085;
+    border-color: #b8daff;
+}
+
+.btn-edit:hover {
+    background: #b8daff;
+}
+
+.btn-delete {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.btn-delete:hover {
+    background: #f5c6cb;
+}
+
+/* 重置状态按钮样式 */
+.btn-reset-status {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-left: 4px;
+    font-family: var(--font-family-sans);
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    line-height: 1;
+}
+
+.btn-reset-status:hover {
+    background: #ffeaa7;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.empty-state a, .btn-retry {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: inherit;
+}
+
+.empty-state a:hover, .btn-retry:hover {
+    text-decoration: none;
+}
+
+.feedback {
+    margin-top: 15px;
+    text-align: left;
+    font-size: 0.9em;
+    min-height: 1.2em;
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 4px solid #ddd;
+    background: #f8f9fa;
+}
+
+.feedback.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-left-color: #28a745;
+}
+
+.feedback.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-left-color: #dc3545;
+}
+
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 20px 0;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #666;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-family-sans);
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #f5f5f5;
+    border-color: #4f8cff;
+    color: #4f8cff;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination .current-page {
+    background: #4f8cff;
+    color: white;
+    border-color: #4f8cff;
+}
+
+.pagination span {
+    color: #999;
+    padding: 0 8px;
+} 

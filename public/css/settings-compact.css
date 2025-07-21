@@ -1,0 +1,368 @@
+/* ==================== 系统设置紧凑样式 ==================== */
+
+/* 左右两栏主容器 */
+.settings-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-6);
+    padding: var(--spacing-6);
+}
+
+/* 左栏：服务与API连接 */
+.settings-left-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+/* 右栏：基础设置 */
+.settings-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+/* 栏目头部 */
+.column-header {
+    margin-bottom: var(--spacing-2);
+}
+
+.column-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
+    padding: var(--spacing-3) 0;
+    border-bottom: 2px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+/* 紧凑的设置卡片 */
+.setting-card-compact {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4);
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.setting-card-compact:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+/* 设置卡片头部 */
+.setting-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-3);
+    padding-bottom: var(--spacing-2);
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.setting-title-compact {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+/* 状态图标样式 */
+.setting-status-icon {
+    font-size: var(--font-size-base);
+    margin-left: var(--spacing-2);
+    transition: all var(--transition-fast);
+}
+
+.setting-status-icon.success {
+    color: var(--color-success);
+}
+
+.setting-status-icon.error {
+    color: var(--color-danger);
+}
+
+.setting-status-icon.checking {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* 测试连接按钮 */
+.btn-test-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-3);
+    background: var(--color-primary);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.btn-test-compact:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-test-compact:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* 设置卡片内容 */
+.setting-content-compact {
+    padding: 0;
+}
+
+.form-control-compact {
+    width: 100%;
+    padding: var(--spacing-2) var(--spacing-3);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.form-control-compact:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-text-compact {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-top: var(--spacing-1);
+    line-height: var(--line-height-normal);
+}
+
+/* 配置状态标签 */
+.config-status {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    background: var(--bg-primary);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-secondary);
+}
+
+/* 快捷操作区域 */
+.quick-actions-compact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.quick-action-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+/* 自定义时间范围 */
+.date-range-compact {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.date-range-compact .form-control-compact {
+    flex: 1;
+}
+
+.date-separator {
+    color: var(--text-tertiary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+/* 设置操作按钮 */
+.settings-actions-compact {
+    display: flex;
+    gap: var(--spacing-3);
+    justify-content: center;
+    padding: var(--spacing-6);
+    border-top: 1px solid var(--border-secondary);
+    background: var(--bg-secondary);
+}
+
+.btn-lg-compact {
+    padding: var(--spacing-3) var(--spacing-6);
+    font-size: var(--font-size-base);
+    min-width: 140px;
+    justify-content: center;
+}
+
+/* 紧凑的反馈消息 */
+.feedback-compact {
+    margin: var(--spacing-4) var(--spacing-6) 0;
+    padding: var(--spacing-3);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    display: none;
+}
+
+.feedback-compact.show {
+    display: block;
+}
+
+.feedback-compact.success {
+    background: var(--color-success-light);
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
+
+.feedback-compact.error {
+    background: var(--color-danger-light);
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger);
+}
+
+.feedback-compact.info {
+    background: var(--color-info-light);
+    color: var(--color-info);
+    border: 1px solid var(--color-info);
+}
+
+/* 系统信息样式 */
+.system-info-compact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-2) 0;
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.info-value {
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 响应式设计 - 移动端改为上下布局 */
+@media (max-width: 1024px) {
+    .settings-two-column {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+        padding: var(--spacing-4);
+    }
+    
+    .column-title {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-2) 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-two-column {
+        padding: var(--spacing-3);
+        gap: var(--spacing-3);
+    }
+    
+    .settings-left-column,
+    .settings-right-column {
+        gap: var(--spacing-3);
+    }
+    
+    .setting-card-compact {
+        padding: var(--spacing-3);
+    }
+    
+    .setting-header-compact {
+        flex-direction: column;
+        gap: var(--spacing-2);
+        align-items: flex-start;
+    }
+    
+    .quick-actions-compact {
+        gap: var(--spacing-2);
+    }
+    
+    .date-range-compact {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-2);
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-1);
+    }
+    
+    .settings-actions-compact {
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+    
+    .btn-lg-compact {
+        width: 100%;
+        min-width: auto;
+    }
+}

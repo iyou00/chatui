@@ -1,0 +1,119 @@
+/* report-detail.css
+   报告详情页样式，现代简洁风格，适配桌面端
+*/
+
+body {
+    background: #f7f9fb;
+    font-family: var(--font-family-sans);
+    margin: 0;
+    padding: 0;
+}
+
+.report-detail-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 36px 32px 28px 32px;
+}
+
+.report-detail-container h1 {
+    font-size: 1.4em;
+    margin-bottom: 18px;
+    color: #2d3a4b;
+    text-align: center;
+}
+
+.report-meta ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+}
+
+.report-meta li {
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+
+.status.success {
+    color: #27ae60;
+    font-weight: bold;
+}
+.status.failed {
+    color: #e74c3c;
+    font-weight: bold;
+}
+.status.processing {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.fail-reason {
+    color: #e74c3c;
+    font-size: 0.98em;
+    margin-left: 6px;
+}
+
+.report-actions {
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.btn-preview, .btn-download, .btn-load-preview {
+    background: #f5f7fa;
+    color: #357ae8;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 18px;
+    margin-right: 8px;
+    font-family: var(--font-family-sans);
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-preview:hover, .btn-download:hover, .btn-load-preview:hover {
+    background: #eaf2ff;
+}
+
+.report-preview {
+    background: #f8fafc;
+    border-radius: 6px;
+    padding: 16px 12px;
+    min-height: 80px;
+    margin-bottom: 18px;
+    font-size: 1em;
+    overflow-x: auto;
+}
+
+.feedback {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1em;
+    min-height: 1.2em;
+}
+
+.feedback.success {
+    color: #27ae60;
+}
+
+.feedback.error {
+    color: #e74c3c;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.back-link a {
+    color: #357ae8;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+} 

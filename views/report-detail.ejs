@@ -1,0 +1,49 @@
+<!--
+report-detail.ejs
+
+报告详情页，展示报告元数据、状态、失败原因，支持在线预览和下载。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>报告详情 - 微信群聊智能分析平台</title>
+    <link rel="stylesheet" href="/css/style.css?v=5.5">
+    <link rel="stylesheet" href="/css/report-detail.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>微信群聊智能分析平台</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/tasks" class="nav-link">任务管理</a></li>
+                <li><a href="/reports" class="nav-link active">报告中心</a></li>
+                <li><a href="/prompt-templates" class="nav-link">提示词管理</a></li>
+                <li><a href="/settings" class="nav-link">系统设置</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="report-detail-container">
+        <h1>报告详情</h1>
+        <div id="report-meta" class="report-meta">
+            <!-- 元数据由JS动态渲染 -->
+        </div>
+        <div class="report-actions" id="report-actions">
+            <!-- 操作按钮由JS动态渲染 -->
+        </div>
+        <div id="report-preview" class="report-preview">
+            <!-- 报告HTML预览由JS动态加载 -->
+        </div>
+        <div id="report-feedback" class="feedback"></div>
+        <div class="back-link"><a href="/reports">返回报告历史</a></div>
+    </div>
+    <script>
+        // 当前报告ID，供JS使用
+        window.REPORT_ID = <%- typeof reportId !== 'undefined' ? JSON.stringify(reportId) : 'null' %>;
+    </script>
+    <script src="/js/report-detail.js"></script>
+</body>
+</html> 

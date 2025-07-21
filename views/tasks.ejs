@@ -1,0 +1,83 @@
+<!--
+tasks.ejs
+
+任务管理主界面，展示任务列表，含状态、下次执行时间、操作按钮。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>任务管理 - 微信群聊智能分析平台</title>
+    <link rel="stylesheet" href="/css/style.css?v=5.6">
+    <link rel="stylesheet" href="/css/task-list.css?v=5.6">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>微信群聊智能分析平台</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/tasks" class="nav-link active">任务管理</a></li>
+                <li><a href="/reports" class="nav-link">报告中心</a></li>
+                <li><a href="/prompt-templates" class="nav-link">提示词管理</a></li>
+                <li><a href="/settings" class="nav-link">系统设置</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="切换主题">🌙</button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-container">
+        
+        <div class="page-content">
+            <div class="content-header">
+                            <div class="content-actions">
+                <a href="/tasks/create" class="btn btn-primary">
+                    <span>🚀</span> 新建任务
+                </a>
+            </div>
+            </div>
+            
+            <div class="content-main">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>任务名称</th>
+                                <th>分析群聊</th>
+                                <th>计划执行时间</th>
+                                <th>状态</th>
+                                <th>进度</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="task-list-body">
+                            <!-- 任务列表由JS动态渲染 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <div class="empty-icon">🎯</div>
+                    <h3>暂无任务</h3>
+                    <p>还没有创建任何分析任务，点击上方按钮创建第一个任务。</p>
+                    <a href="/tasks/create" class="btn btn-primary">创建任务</a>
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- 分页控件 -->
+                </div>
+            </div>
+            
+            <div id="task-feedback" class="feedback"></div>
+        </div>
+    </div>
+    <script src="/js/theme.js"></script>
+    <script src="/js/scroll-to-top.js"></script>
+    <script src="/js/ui-manager.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script src="/js/task-list.js"></script>
+</body>
+</html> 

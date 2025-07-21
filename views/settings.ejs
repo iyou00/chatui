@@ -1,0 +1,198 @@
+<!--
+settings.ejs
+
+首次运行设置引导页，用户填写chatlog服务地址和各LLM API密钥。
+包含表单、说明、反馈区，引用settings.js和settings.css。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首次运行设置 - 微信群聊智能分析平台</title>
+    <link rel="stylesheet" href="/css/style.css?v=5.5">
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>微信群聊智能分析平台</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/tasks" class="nav-link">任务管理</a></li>
+                <li><a href="/reports" class="nav-link">报告中心</a></li>
+                <li><a href="/prompt-templates" class="nav-link">提示词管理</a></li>
+                <li><a href="/settings" class="nav-link active">系统设置</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="切换主题">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+
+        <div class="page-content">
+            <!-- 紧凑的头部 -->
+            <div class="content-header-compact">
+                <div class="header-left">
+                    <h2 class="page-title">⚙️ 系统设置</h2>
+                    <span class="config-status" id="configStatus">配置完成度 80%</span>
+                </div>
+            </div>
+
+            <div class="content-main">
+                <!-- 左右两栏布局 -->
+                <div class="settings-two-column">
+                    <!-- 左栏：服务与API连接 -->
+                    <div class="settings-left-column">
+                        <div class="column-header">
+                            <h3 class="column-title">🔗 服务与API连接</h3>
+                            <p class="column-subtitle">💡 提示：至少需要配置一个LLM API密钥，可任选DeepSeek、Gemini或Kimi</p>
+                        </div>
+                        
+                        <!-- ChatLog服务 -->
+                        <div class="setting-card-compact">
+                            <div class="setting-header-compact">
+                                <h4 class="setting-title-compact">📡 ChatLog服务地址 <span class="setting-status-icon" id="chatlogStatus">❌</span></h4>
+                                <button type="button" id="testChatlogBtn" class="btn-test-compact">
+                                    🔗 测试连接
+                                </button>
+                            </div>
+                            <div class="setting-content-compact">
+                                <input type="text" id="chatlogUrl" name="chatlogUrl" class="form-control-compact"
+                                    placeholder="http://localhost:9001" required>
+                            </div>
+                        </div>
+
+                        <!-- DeepSeek API -->
+                        <div class="setting-card-compact">
+                            <div class="setting-header-compact">
+                                <h4 class="setting-title-compact">🤖 DeepSeek API密钥 <span class="setting-status-icon" id="deepseekStatus">❌</span></h4>
+                                <button type="button" id="testDeepseekBtn" class="btn-test-compact">
+                                    🔍 验证密钥
+                                </button>
+                            </div>
+                            <div class="setting-content-compact">
+                                <input type="password" id="deepseek" name="deepseek" class="form-control-compact"
+                                    placeholder="sk-... (可选)">
+                            </div>
+                        </div>
+
+                        <!-- Gemini API -->
+                        <div class="setting-card-compact">
+                            <div class="setting-header-compact">
+                                <h4 class="setting-title-compact">🔮 Gemini API密钥 <span class="setting-status-icon" id="geminiStatus">❌</span></h4>
+                                <button type="button" id="testGeminiBtn" class="btn-test-compact">
+                                    🔍 验证密钥
+                                </button>
+                            </div>
+                            <div class="setting-content-compact">
+                                <input type="password" id="gemini" name="gemini" class="form-control-compact"
+                                    placeholder="AIza... (可选)">
+                            </div>
+                        </div>
+
+                        <!-- Kimi API -->
+                        <div class="setting-card-compact">
+                            <div class="setting-header-compact">
+                                <h4 class="setting-title-compact">🌟 Kimi API密钥 <span class="setting-status-icon" id="kimiStatus">❌</span></h4>
+                                <button type="button" id="testKimiBtn" class="btn-test-compact">
+                                    🔍 验证密钥
+                                </button>
+                            </div>
+                            <div class="setting-content-compact">
+                                <input type="password" id="kimi" name="kimi" class="form-control-compact"
+                                    placeholder="sk-... (可选)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右栏：基础设置 -->
+                    <div class="settings-right-column">
+                        <div class="column-header">
+                            <h3 class="column-title">📊 基础设置</h3>
+                        </div>
+                        
+                        <!-- 默认配置 -->
+                        <div class="setting-card-compact">
+                            <div class="setting-header-compact">
+                                <h4 class="setting-title-compact">⏰ 默认分析时间范围</h4>
+                            </div>
+                            <div class="setting-content-compact">
+                                <select id="defaultTimeRange" name="defaultTimeRange" class="form-control-compact">
+                                    <option value="recent_1d">最近1天</option>
+                                    <option value="recent_3d">最近3天</option>
+                                    <option value="recent_7d" selected>最近7天</option>
+                                    <option value="recent_15d">最近15天</option>
+                                    <option value="recent_30d">最近30天</option>
+                                    <option value="custom">自定义范围</option>
+                                    <option value="all">所有时间</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 自定义时间范围 -->
+                        <div class="setting-card-compact" id="customTimeRangeCard" style="display: none;">
+                            <div class="setting-header-compact">
+                                <h4 class="setting-title-compact">📅 自定义时间范围</h4>
+                            </div>
+                            <div class="setting-content-compact">
+                                <div class="date-range-compact">
+                                    <input type="date" id="customStartDate" name="customStartDate" class="form-control-compact">
+                                    <span class="date-separator">至</span>
+                                    <input type="date" id="customEndDate" name="customEndDate" class="form-control-compact">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- 系统信息 -->
+                        <div class="setting-card-compact">
+                            <div class="setting-header-compact">
+                                <h4 class="setting-title-compact">ℹ️ 系统信息</h4>
+                            </div>
+                            <div class="setting-content-compact">
+                                <div class="system-info-compact">
+                                    <div class="info-item">
+                                        <span class="info-label">版本号：</span>
+                                        <span class="info-value">v2.0.0</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">运行时间：</span>
+                                        <span class="info-value" id="uptime">--</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">数据库：</span>
+                                        <span class="info-value">JSON文件</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="settings-actions-compact">
+                    <button type="submit" id="saveBtn" class="btn-primary-compact btn-lg-compact">
+                        <span>💾</span> 保存配置
+                    </button>
+                    <button type="button" class="btn-secondary-compact btn-lg-compact" onclick="resetConfig()">
+                        <span>🔄</span> 重置配置
+                    </button>
+                </div>
+
+                <div id="feedback" class="feedback-compact"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/theme.js"></script>
+    <script src="/js/scroll-to-top.js"></script>
+    <script src="/js/ui-manager.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script src="/js/settings.js"></script>
+</body>
+
+</html>

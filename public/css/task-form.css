@@ -1,0 +1,486 @@
+/* task-form.css
+   任务创建/编辑表单页样式，现代简洁风格，适配桌面端
+*/
+
+body {
+    background: #f7f9fb;
+    font-family: var(--font-family-sans);
+    margin: 0;
+    padding: 0;
+}
+
+.task-form-container {
+    max-width: 480px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    padding: 36px 32px 28px 32px;
+}
+
+.task-form-container h1 {
+    font-size: 1.4em;
+    margin-bottom: 18px;
+    color: #2d3a4b;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #2d3a4b;
+}
+
+.form-group .required {
+    color: #e74c3c;
+    font-size: 1em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="datetime-local"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #dbe2ea;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border 0.2s;
+    box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="datetime-local"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4f8cff;
+    outline: none;
+}
+
+.form-group small {
+    color: #8a99b3;
+    font-size: 0.92em;
+    margin-top: 2px;
+    display: block;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 18px;
+}
+
+#saveBtn {
+    background: #4f8cff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 36px;
+    font-size: 1.08em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#saveBtn:hover {
+    background: #357ae8;
+}
+
+.btn-cancel {
+    background: #f5f7fa;
+    color: #357ae8;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 24px;
+    font-family: var(--font-family-sans);
+    font-size: 1em;
+    text-decoration: none;
+    margin-left: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #eaf2ff;
+}
+
+.feedback {
+    margin-top: 18px;
+    text-align: left;
+    font-size: 0.9em;
+    min-height: 1.2em;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 4px solid #ddd;
+    background: #f8f9fa;
+}
+
+.feedback.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-left-color: #28a745;
+}
+
+.feedback.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-left-color: #dc3545;
+}
+
+.feedback.warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-left-color: #ffc107;
+}
+
+.feedback code {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: var(--font-family-mono);
+    font-size: 0.85em;
+}
+
+.feedback a {
+    text-decoration: underline;
+}
+
+.feedback a:hover {
+    text-decoration: none;
+}
+
+/* 提示词模板相关样式 */
+.template-preview {
+    background: #f8f9fa;
+    border: 1px solid #e0e6ef;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 8px;
+}
+
+.template-info h4 {
+    margin: 0 0 8px 0;
+    color: #2d3a4b;
+    font-size: 1.1em;
+}
+
+.template-info p {
+    margin: 0 0 12px 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.template-content {
+    margin-top: 10px;
+}
+
+.template-content summary {
+    cursor: pointer;
+    color: #4f8cff;
+    font-weight: 500;
+    padding: 8px 0;
+    border-top: 1px solid #e0e6ef;
+    margin-top: 10px;
+}
+
+.template-content summary:hover {
+    color: #357ae8;
+}
+
+.template-content pre {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 10px 0 0 0;
+    font-size: 0.85em;
+    line-height: 1.4;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* 群聊选择样式 - 提高优先级 */
+.task-form-container .chatroom-search-container {
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+    margin-bottom: 15px !important;
+}
+
+.task-form-container .chatroom-search-container input {
+    flex: 1 !important;
+    padding: 8px 12px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-family: var(--font-family-sans) !important;
+}
+
+.task-form-container .btn-refresh {
+    padding: 8px 15px !important;
+    background-color: #f8f9fa !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-family: var(--font-family-sans) !important;
+    font-size: 14px !important;
+    transition: background-color 0.2s !important;
+}
+
+.task-form-container .btn-refresh:hover {
+    background-color: #e9ecef !important;
+}
+
+.task-form-container .chatroom-list-container {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    background-color: #fff !important;
+}
+
+.task-form-container .loading-indicator,
+.task-form-container .empty-state {
+    padding: 20px !important;
+    text-align: center !important;
+    color: #666 !important;
+    font-family: var(--font-family-sans) !important;
+}
+
+.task-form-container .spinner {
+    display: inline-block !important;
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid #f3f3f3 !important;
+    border-top: 2px solid #3498db !important;
+    border-radius: 50% !important;
+    animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.task-form-container .chatroom-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 群聊选择项样式 - 清理版本 */
+.chatroom-item {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    padding: 10px 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid #eee !important;
+    background: #fff !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s !important;
+    font-family: var(--font-family-sans) !important;
+}
+
+/* 复选框样式 */
+.chatroom-item input[type="checkbox"] {
+    flex: none !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 10px 0 0 !important;
+}
+
+/* 群聊名称样式 */
+.chatroom-item label,
+.chatroom-item .chatroom-name {
+    flex: 1 !important;
+    text-align: left !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+    margin: 0 8px 0 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* 群聊信息标签样式 */
+.chatroom-item .chatroom-info {
+    flex: none !important;
+    font-size: 0.85em !important;
+    color: #666 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+}
+
+.task-form-container .chatroom-item:hover {
+    background-color: #f8f9fa !important;
+}
+
+.task-form-container .chatroom-item.selected {
+    background-color: #e3f2fd !important;
+    border-left: 3px solid #2196f3 !important;
+}
+
+/* 隐藏不匹配的群聊项 - 提高优先级 */
+.task-form-container .chatroom-item.hidden {
+    display: none !important;
+}
+
+.task-form-container .selected-summary {
+    margin-top: 10px !important;
+    padding: 10px !important;
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    font-size: 0.9em !important;
+    color: #495057 !important;
+    font-family: var(--font-family-sans) !important;
+}
+
+.task-form-container .btn-clear-all {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    padding: 5px 10px !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    font-size: 0.8em !important;
+    margin-top: 5px !important;
+    font-family: var(--font-family-sans) !important;
+}
+
+.task-form-container .btn-clear-all:hover {
+    background-color: #c82333 !important;
+}
+
+/* 定时配置样式 */
+.schedule-type-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.schedule-option {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #fff;
+}
+
+.schedule-option:hover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.schedule-option input[type="radio"] {
+    display: none;
+}
+
+.schedule-option input[type="radio"]:checked+.option-label {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.schedule-option input[type="radio"]:checked {
+    display: none;
+}
+
+.schedule-option:has(input[type="radio"]:checked) {
+    border-color: #007bff;
+    background-color: #e7f3ff;
+}
+
+.option-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.schedule-option small {
+    display: block;
+    color: #666;
+    font-size: 13px;
+}
+
+.schedule-config {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+.schedule-config label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.schedule-config input[type="datetime-local"],
+.schedule-config input[type="time"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.weekday-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.weekday-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    background-color: #fff;
+}
+
+.weekday-option:hover {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+}
+
+.weekday-option input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+.weekday-option:has(input[type="checkbox"]:checked) {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.weekday-option:has(input[type="checkbox"]:checked):hover {
+    background-color: #0056b3;
+}
