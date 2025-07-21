@@ -562,7 +562,9 @@ ${messageText}
                 timeout: 120000, // 增加到120秒超时
                 validateStatus: function (status) {
                     return status < 500; // 接受所有非5xx状态码
-                }
+                },
+                // DeepSeek API不需要代理，直接访问
+                proxy: false
             });
 
             // 检查HTTP状态
@@ -934,7 +936,9 @@ ${messageText}
                 timeout: 120000, // 增加超时时间到120秒，解决30秒超时问题
                 validateStatus: function (status) {
                     return status < 500; // 接受所有非5xx状态码
-                }
+                },
+                // Kimi API不需要代理，直接访问
+                proxy: false
             });
 
             // 检查HTTP状态
