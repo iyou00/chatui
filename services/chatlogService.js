@@ -163,7 +163,9 @@ async function getChatroomsFromExternal() {
                     headers: {
                         'User-Agent': 'ChatChat-Platform/1.0',
                         'Accept': 'application/json, text/csv, text/plain'
-                    }
+                    },
+                    // 绕过代理设置，因为ChatLog是本地服务
+                    proxy: false
                 });
 
                 // 检查响应是否是HTML页面
