@@ -500,7 +500,9 @@ class TaskScheduler {
                 headers: {
                     'User-Agent': 'ChatChat-Platform/1.0',
                     'Accept': 'text/plain, application/json'
-                }
+                },
+                // 绕过代理设置，因为ChatLog是本地服务
+                proxy: false
             });
 
             logger.info(`📊 ChatLog API响应 (时间范围: ${timeParam}):`, {
@@ -534,7 +536,9 @@ class TaskScheduler {
                         headers: {
                             'User-Agent': 'ChatChat-Platform/1.0',
                             'Accept': 'text/plain'
-                        }
+                        },
+                        // 绕过代理设置，因为ChatLog是本地服务
+                        proxy: false
                     });
 
                     if (textResponse.data && typeof textResponse.data === 'string') {
