@@ -896,7 +896,9 @@ router.get('/chatlog/test', async (req, res) => {
                 timeout: 5000,
                 headers: {
                     'User-Agent': 'ChatChat-Platform/1.0'
-                }
+                },
+                // 绕过代理设置，因为ChatLog是本地服务
+                proxy: false
             });
 
             if (response.status === 200) {
