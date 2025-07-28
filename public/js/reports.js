@@ -120,6 +120,7 @@ class ReportsManager {
         const statusClass = this.getStatusClass(report.status);
         const statusText = this.getStatusText(report.status);
         const chatroomDisplay = this.getChatroomDisplay(report);
+        const timeRangeDisplay = this.getTimeRangeDisplay(report);
         const messageCountDisplay = this.getMessageCountDisplay(report);
         const typeDisplay = this.getTypeDisplay(report);
         
@@ -135,6 +136,11 @@ class ReportsManager {
                     <div class="${report.is_summary ? 'chatroom-name summary' : 'chatroom-name'}" 
                          title="${chatroomDisplay}">
                         ${chatroomDisplay}
+                    </div>
+                </td>
+                <td>
+                    <div class="time-range" title="${timeRangeDisplay}">
+                        ${timeRangeDisplay}
                     </div>
                 </td>
                 <td>
@@ -176,6 +182,41 @@ class ReportsManager {
             return '<div class="report-type-badge report-type-summary">📋 摘要</div>';
         }
         return '<div class="report-type-badge report-type-chatroom">📱 群聊</div>';
+    }
+
+    getTimeRangeDisplay(report) {
+        if (report.is_summary) {
+            return '-';
+        }
+        
+        if (!report.time_range) {
+            return '未知';
+        }
+        
+        const timeRange = report.time_range;
+        
+        // 处理不同类型的时间范围
+        switch (timeRange.type) {
+            case 'recent_1d':
+                return '📅 最近1天';
+            case 'recent_3d':
+                return '📅 最近3天';
+            case 'recent_7d':
+                return '📅 最近7天';
+            case 'recent_15d':
+                return '📅 最近15天';
+            case 'recent_30d':
+                return '📅 最近30天';
+            case 'custom':
+                if (timeRange.start_date && timeRange.end_date) {
+                    return `📅 ${timeRange.start_date} 至 ${timeRange.end_date}`;
+                }
+                return '📅 自定义时间';
+            case 'all':
+                return '📅 全部时间';
+            default:
+                return timeRange.type || '未知';
+        }
     }
 
     getStatusClass(status) {
@@ -460,7 +501,7 @@ class ReportsManager {
 
 
     showLoading() {
-        this.reportTbody.innerHTML = '<tr><td colspan="6" class="loading">加载中...</td></tr>';
+        this.reportTbody.innerHTML = '<tr><td colspan="7" class="loading">加载中...</td></tr>';
     }
 
     showEmpty() {
@@ -476,7 +517,7 @@ class ReportsManager {
     showError(message) {
         this.reportTbody.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align: center; color: #c62828; padding: 40px;">
+                <td colspan="7" style="text-align: center; color: #c62828; padding: 40px;">
                     ❌ ${message}
                 </td>
             </tr>

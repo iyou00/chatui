@@ -431,11 +431,16 @@ class DatabaseManager {
         
         const reportId = this.config.nextReportId++;
 
+        // 获取任务的时间范围信息
+        const task = this.getTask(task_id);
+        const time_range = task ? task.time_range : null;
+
         const newReport = {
             id: reportId,
             task_id,
             task_name,
             chatroom_name, // 新增：群聊名称
+            time_range, // 新增：分析时间范围
             execution_time,
             status,
             report_file,
@@ -452,6 +457,7 @@ class DatabaseManager {
             id: reportId, 
             task_id, 
             chatroom_name, 
+            time_range,
             status,
             is_summary 
         });
@@ -861,6 +867,39 @@ class DatabaseManager {
     }
 
     /**
+     * 迁移报告数据，为现有报告添加时间范围信息
+     */
+    migrateReportData() {
+        let migratedCount = 0;
+        
+        this.reports.forEach(report => {
+            // 如果报告没有时间范围信息，从对应的任务中获取
+            if (!report.time_range && report.task_id) {
+                const task = this.getTask(report.task_id);
+                if (task && task.time_range) {
+                    report.time_range = task.time_range;
+                    migratedCount++;
+                    logger.info(`迁移报告数据: ${report.task_name} (ID: ${report.id}) - 添加时间范围信息`);
+                } else {
+                    // 如果任务不存在或没有时间范围，设置默认值
+                    report.time_range = { type: 'recent_7d' };
+                    migratedCount++;
+                    logger.info(`迁移报告数据: ${report.task_name} (ID: ${report.id}) - 设置默认时间范围`);
+                }
+            }
+        });
+        
+        if (migratedCount > 0) {
+            this.saveData();
+            logger.info(`报告数据迁移完成: ${migratedCount} 个报告已更新`);
+        } else {
+            logger.info('无需迁移报告数据');
+        }
+        
+        return migratedCount;
+    }
+
+    /**
      * 初始化数据库
      */
     initialize() {
@@ -870,6 +909,9 @@ class DatabaseManager {
             
             // 清理异常的任务状态
             this.cleanupTaskStatus();
+            
+            // 迁移报告数据，为现有报告添加时间范围信息
+            this.migrateReportData();
             
             logger.info('数据存储初始化完成（JSON文件模式）');
         } catch (error) {

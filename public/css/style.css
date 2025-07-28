@@ -2055,3 +2055,69 @@ body {
         justify-content: center;
     }
 }
+/* ========
+============ 时间范围显示样式 ==================== */
+.time-range {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    background: linear-gradient(135deg, var(--neutral-50), var(--neutral-100));
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-primary);
+    display: inline-block;
+    white-space: nowrap;
+    font-weight: var(--font-medium);
+    box-shadow: var(--shadow-xs);
+    transition: all var(--duration-150) var(--ease-out);
+}
+
+.time-range:hover {
+    background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
+    color: var(--primary-700);
+    border-color: var(--primary-200);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 不同时间范围类型的颜色区分 */
+.time-range[title*="最近1天"] {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #d97706;
+    border-color: #fcd34d;
+}
+
+.time-range[title*="最近3天"] {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #1d4ed8;
+    border-color: #93c5fd;
+}
+
+.time-range[title*="最近7天"] {
+    background: linear-gradient(135deg, var(--success-100), var(--success-200));
+    color: var(--success-700);
+    border-color: var(--success-300);
+}
+
+.time-range[title*="最近15天"] {
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+    color: #7c3aed;
+    border-color: #c4b5fd;
+}
+
+.time-range[title*="最近30天"] {
+    background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+    color: #be185d;
+    border-color: #f9a8d4;
+}
+
+.time-range[title*="自定义"] {
+    background: linear-gradient(135deg, #fff7ed, #fed7aa);
+    color: #ea580c;
+    border-color: #fdba74;
+}
+
+.time-range[title*="全部时间"] {
+    background: linear-gradient(135deg, var(--neutral-100), var(--neutral-200));
+    color: var(--neutral-700);
+    border-color: var(--neutral-300);
+}
