@@ -71,7 +71,7 @@ function parseCSVChatrooms(csvData) {
         if (wxid) {
             // 优先使用昵称作为显示名称，其次使用备注，最后使用ID
             let displayName = nickname || remark || wxid;
-            
+
             // 如果显示名称为空或只是ID，跳过
             if (!displayName || displayName.trim() === '') {
                 continue;
@@ -113,36 +113,36 @@ async function getChatroomsFromExternal() {
         // 尝试多个可能的API端点和参数组合
         const apiAttempts = [
             // 标准API v1端点
-            { 
-                endpoint: '/api/v1/chatroom', 
-                params: { format: 'json' }, 
-                desc: 'API v1 + JSON格式' 
+            {
+                endpoint: '/api/v1/chatroom',
+                params: { format: 'json' },
+                desc: 'API v1 + JSON格式'
             },
-            { 
-                endpoint: '/api/v1/chatroom', 
-                params: { format: 'csv' }, 
-                desc: 'API v1 + CSV格式' 
+            {
+                endpoint: '/api/v1/chatroom',
+                params: { format: 'csv' },
+                desc: 'API v1 + CSV格式'
             },
-            { 
-                endpoint: '/api/v1/chatroom', 
-                params: { limit: 100 }, 
-                desc: 'API v1 + 限制数量' 
+            {
+                endpoint: '/api/v1/chatroom',
+                params: { limit: 100 },
+                desc: 'API v1 + 限制数量'
             },
-            { 
-                endpoint: '/api/v1/chatroom', 
-                params: {}, 
-                desc: 'API v1 无参数' 
+            {
+                endpoint: '/api/v1/chatroom',
+                params: {},
+                desc: 'API v1 无参数'
             },
             // 备选端点
-            { 
-                endpoint: '/api/chatroom', 
-                params: { format: 'json' }, 
-                desc: '简化API + JSON格式' 
+            {
+                endpoint: '/api/chatroom',
+                params: { format: 'json' },
+                desc: '简化API + JSON格式'
             },
-            { 
-                endpoint: '/chatroom', 
-                params: {}, 
-                desc: '简单端点' 
+            {
+                endpoint: '/chatroom',
+                params: {},
+                desc: '简单端点'
             },
         ];
 
@@ -213,7 +213,7 @@ async function getChatroomsFromExternal() {
 
         console.log('🔍 分析响应数据类型和内容...');
         console.log(`📊 数据类型: ${typeof response.data}`);
-        
+
         if (typeof response.data === 'string') {
             const rawData = response.data.trim();
             console.log(`📏 字符串长度: ${rawData.length}`);
@@ -250,7 +250,7 @@ async function getChatroomsFromExternal() {
                 } catch (parseError) {
                     console.error('❌ JSON解析失败:', parseError.message);
                     console.log('📄 尝试按行解析纯文本...');
-                    
+
                     // 如果不是JSON也不是标准CSV，尝试按行解析
                     const lines = rawData.split('\n').filter(line => line.trim());
                     if (lines.length > 0) {
@@ -272,10 +272,10 @@ async function getChatroomsFromExternal() {
         } else if (typeof response.data === 'object' && response.data !== null) {
             // 对象格式，尝试提取数组
             console.log('📋 对象结构字段数:', Object.keys(response.data).length);
-            groups = response.data.data || response.data.chatrooms || response.data.rooms || 
-                    response.data.groups || response.data.chatroom || [];
+            groups = response.data.data || response.data.chatrooms || response.data.rooms ||
+                response.data.groups || response.data.chatroom || [];
             console.log(`✅ 从对象中提取数组数据: ${groups.length} 项`);
-            
+
             // 如果对象格式还是空的，可能数据在其他字段中
             if (groups.length === 0) {
                 console.log('⚠️ 标准字段为空，检查其他可能的字段...');
@@ -309,10 +309,10 @@ async function getChatroomsFromExternal() {
 
         // 处理ChatLog返回的数据格式
         let chatrooms = [];
-        
+
         if (Array.isArray(groups)) {
             console.log('🔍 处理群聊数组数据...');
-            
+
             chatrooms = groups.map(group => {
                 if (typeof group === 'string') {
                     // 如果是字符串，直接返回
@@ -320,16 +320,16 @@ async function getChatroomsFromExternal() {
                 } else if (typeof group === 'object' && group !== null) {
                     // 如果是对象，提取群聊名称
                     // 优先使用 nickName，其次 remark，最后 name（ID）
-                    let displayName = group.nickName || group.nickname || 
-                                    group.remark || group.Remark || 
-                                    group.name || group.id;
-                    
+                    let displayName = group.nickName || group.nickname ||
+                        group.remark || group.Remark ||
+                        group.name || group.id;
+
                     return displayName;
                 } else {
                     return null;
                 }
             }).filter(name => name && name.trim() && name !== 'undefined');
-            
+
             console.log(`✅ 成功提取 ${chatrooms.length} 个群聊名称`);
         } else {
             console.warn('⚠️ 解析结果不是预期的数组格式:', typeof groups);
@@ -338,7 +338,7 @@ async function getChatroomsFromExternal() {
 
         // 去重并返回
         const uniqueChatrooms = [...new Set(chatrooms)];
-        
+
         console.log(`✅ 最终群聊名称列表: ${uniqueChatrooms.length}个（已去重）`);
         // 移除敏感数据预览，只显示统计信息
         if (uniqueChatrooms.length > 0) {
@@ -399,7 +399,7 @@ function getChatlogs() {
  */
 async function getChatrooms() {
     console.log('🔍 开始获取群聊列表...');
-    
+
     // 首先检查配置中是否有预设的群聊名称
     const config = settingsManager.loadConfig();
     const presetChatrooms = config.presetChatrooms || [];
@@ -413,7 +413,7 @@ async function getChatrooms() {
         // 只从外部ChatLog服务获取真实群聊数据
         console.log('🌐 从外部ChatLog服务获取群聊列表...');
         const externalRooms = await getChatroomsFromExternal();
-        
+
         if (externalRooms && externalRooms.length > 0) {
             console.log(`✅ 成功获取 ${externalRooms.length} 个群聊`);
             // 移除敏感数据预览，只显示统计信息

@@ -1174,15 +1174,15 @@ router.post('/validate-api-key', async (req, res) => {
  */
 async function getSmartProxyConfigForValidation() {
     const net = require('net');
-    
+
     // 检测常见代理端口是否可用
     const proxyHost = '127.0.0.1';
     const proxyPort = 7897;
-    
+
     return new Promise((resolve) => {
         const socket = new net.Socket();
         const timeout = 1000; // 1秒超时
-        
+
         socket.setTimeout(timeout);
         socket.on('connect', () => {
             socket.destroy();
@@ -1193,19 +1193,19 @@ async function getSmartProxyConfigForValidation() {
                 protocol: 'http'
             });
         });
-        
+
         socket.on('timeout', () => {
             socket.destroy();
             // 代理不可用，返回false绕过代理
             resolve(false);
         });
-        
+
         socket.on('error', () => {
             socket.destroy();
             // 代理不可用，返回false绕过代理
             resolve(false);
         });
-        
+
         socket.connect(proxyPort, proxyHost);
     });
 }
@@ -1216,7 +1216,7 @@ async function getSmartProxyConfigForValidation() {
 async function validateDeepSeekApiKey(apiKey) {
     try {
         const axios = require('axios');
-        
+
         // 智能代理配置
         const proxyConfig = await getSmartProxyConfigForValidation();
         const axiosConfig = {
@@ -1226,7 +1226,7 @@ async function validateDeepSeekApiKey(apiKey) {
             },
             timeout: 10000
         };
-        
+
         // 如果代理可用，使用代理；否则绕过代理
         if (proxyConfig) {
             axiosConfig.proxy = proxyConfig;
@@ -1235,7 +1235,7 @@ async function validateDeepSeekApiKey(apiKey) {
             axiosConfig.proxy = false;
             console.log('DeepSeek API验证绕过代理（代理不可用）');
         }
-        
+
         const response = await axios.post('https://api.deepseek.com/v1/chat/completions', {
             model: 'deepseek-chat',
             messages: [{ role: 'user', content: 'test' }],
@@ -1310,7 +1310,7 @@ async function validateGeminiApiKey(apiKey) {
 async function validateKimiApiKey(apiKey) {
     try {
         const axios = require('axios');
-        
+
         // 智能代理配置
         const proxyConfig = await getSmartProxyConfigForValidation();
         const axiosConfig = {
@@ -1320,7 +1320,7 @@ async function validateKimiApiKey(apiKey) {
             },
             timeout: 10000
         };
-        
+
         // 如果代理可用，使用代理；否则绕过代理
         if (proxyConfig) {
             axiosConfig.proxy = proxyConfig;
@@ -1329,7 +1329,7 @@ async function validateKimiApiKey(apiKey) {
             axiosConfig.proxy = false;
             console.log('Kimi API验证绕过代理（代理不可用）');
         }
-        
+
         const response = await axios.post('https://api.moonshot.cn/v1/chat/completions', {
             model: 'moonshot-v1-8k',
             messages: [{ role: 'user', content: 'test' }],
