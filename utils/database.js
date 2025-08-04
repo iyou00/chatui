@@ -138,14 +138,28 @@ class DatabaseManager {
     }
 
     /**
-     * 保存数据到文件
+     * 保存数据到文件（与settingsManager协调）
      */
     saveData() {
         try {
             fs.writeFileSync(this.tasksFile, JSON.stringify(this.tasks, null, 2));
             fs.writeFileSync(this.reportsFile, JSON.stringify(this.reports, null, 2));
             fs.writeFileSync(this.promptTemplatesFile, JSON.stringify(this.promptTemplates, null, 2));
-            fs.writeFileSync(this.configFile, JSON.stringify(this.config, null, 2));
+            
+            // 🔧 改进：使用settingsManager来保存配置，确保用户设置不被覆盖
+            const settingsManager = require('../services/settingsManager');
+            const currentUserConfig = settingsManager.loadConfig();
+            
+            // 只更新ID计数器字段，保留用户配置
+            const configToSave = {
+                ...currentUserConfig,  // 保留用户设置
+                nextTaskId: this.config.nextTaskId,
+                nextReportId: this.config.nextReportId,
+                nextTemplateId: this.config.nextTemplateId
+            };
+            
+            settingsManager.saveConfig(configToSave);
+            
         } catch (error) {
             logger.error('数据文件保存失败:', error);
             throw error;
